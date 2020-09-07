@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% extends 'blogapp/index.html'%}
+{% load static %}
+{% block head_block%}
+{% endblock%}
+{% block  title_block%}Cricage News{% endblock%}
+{% block body_block%}
+<div id="index-banner" class="parallax-container">
+  <div class="section no-pad-bot">
+    <div class="container">
+      <br><br>
+      <h1 class="header center teal-text text-lighten-2">Cricage News</h1>
+      <div class="row center">
+        <h5 class="header col s12 light">We bring here the news about domestic and district
+level players doing exceedingly well in cricket, so that
+you can get information and news about cricketers
+from your state</h5>
+      </div>
+      <!-- <div class="row center">
+        <a href="http://materializecss.com/getting-started.html" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Start Scoring</a>
+      </div> -->
+      <br><br>
+
+    </div>
+  </div>
+  <div class="parallax"><img src="{% static 'images/ddd.jpg'%}" alt="Unsplashed background img 1"></div>
+</div>
+<br><br><br>
+      <div class="container">
+         <div class="row">
+            {% for post in posts %}
+            <div class="col s12 m4">
+               <div class="card ">
+                  <div class="card-content ">
+                     <span class="card-title">	{{ post.title }}</span>
+                     <h1>{{ MEDIA_URL }}</h1>
+                     <img src="{{post.image1.url}}" class="card-img-top" alt="" height="160px" width="250px">
+                     <p>{{ post.content |truncatewords:30|linebreaks }}</p>
+                  </div>
+                  <div class="card-action">
+                     <a href="/post/{{ post.id }}">Read More</a>
+                  </div>
+               </div>
+            </div>
+            {% endfor %}
+</div>
+</div>
+
+{% endblock%}

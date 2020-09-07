@@ -1,0 +1,17 @@
+.first-form a{
+  border-radius:500px !important;
+  text-align: center !important;
+  font-weight:bold;
+  min-width: 50%;
+}
+.first-form button{
+  border-radius:500px !important;
+  text-align: center !important;
+  min-width: 100%;
+}
+
+
+.formclass{
+  max-width: 50%;
+
+}
