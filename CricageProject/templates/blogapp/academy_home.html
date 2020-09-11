@@ -4,7 +4,34 @@
 {% load static %}
 {% block head_block%}
 {% endblock%}
-{% block  title_block%}Cricage News{% endblock%}
+{% block  title_block%}Cricage-AcademyPage{% endblock %}
 {% block body_block %}
-<h2>Welcome to Cricage Academy</h2>
+<div class="container">
+  <div class="row">
+    <div class="col s12" align="center">
+    <div class="first-form">
+     <div class="card ">
+     <div class="card-content ">
+     <img src="{% static 'images/final.png' %}" alt="..." height="90px;" width="120px;">
+     <h6>Academy || Score || Ground</h6>
+      <h5>Share your information</h5>
+      <hr style="width:60%;text-align:left;margin-left:30">
+      <br>
+      <div class="formclass">
+      <form method="post">
+      {% for field in form.visible_fields %}
+      {% render_field field placeholder=field.label  %}
+      <br><br>
+      {% endfor %}
+      {% csrf_token %}
+      <button href="/home" type="submit" class="btn btn-success" style="font-weight:bold;" name="button">Submit</button>
+      </form>
+    </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+
 {% endblock%}

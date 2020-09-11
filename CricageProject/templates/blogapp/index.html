@@ -4,8 +4,9 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Cricage-HomePage
+  <title>
     {% block  title_block%}
+    Cricage-HomePage
     {% endblock %}
   </title>
 
@@ -21,7 +22,7 @@
   {% if not request.user.is_authenticated %}
   <nav class="white" role="navigation">
     <div class="nav-wrapper container">
-      <a id="logo-container" href="/home" class="brand-logo">
+      <a id="logo-container" href="/" class="brand-logo">
       <img src="{% static 'images/final.png' %}" alt="..." height="65px;" width="90px;">
       </a>
       <ul class="right hide-on-med-and-down" style="font-weight:bold";>
@@ -44,7 +45,7 @@
   {% else %}
   <nav class="white" role="navigation">
     <div class="nav-wrapper container">
-      <a id="logo-container" href="/home" class="brand-logo">
+      <a id="logo-container" href="/" class="brand-logo">
       <img src="{% static 'images/final.png' %}" alt="..." height="65px;" width="90px;">
       </a>
         <ul class="right hide-on-med-and-down" style="font-weight:bold";>

@@ -42,3 +42,9 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.name
+
+class AcademyUser(models.Model):
+    first_name=models.CharField(max_length=12)
+    last_name=models.CharField(max_length=12)
+    email=models.EmailField()
+    phone_no=models.CharField(max_length=10)

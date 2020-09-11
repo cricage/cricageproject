@@ -1,4 +1,4 @@
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render,get_object_or_404,redirect
 from .models import Article
 from django.contrib.auth.decorators import login_required
 from blogapp import forms
@@ -28,6 +28,7 @@ def post_detail(request,id):
             new_comment.post=post
             new_comment.save()
             csubmit=True
+            form=forms.CommentForm()
     else:
         form=forms.CommentForm()
     return render(request,'blogapp/post_detail.html',{'post':post,'form':form,'comments':comments,'csubmit':csubmit})
@@ -45,6 +46,12 @@ def sign_up_view(request):
     return render(request, 'blogapp/signup.html', {'form': form})
 
 
-@login_required
+
 def academy_view(request):
-    return render(request,'blogapp/academy_home.html')
+    form=forms.AcademyUserForm()
+    if request.method == "POST":
+        form = forms.AcademyUserForm(request.POST)
+        if form.is_valid:
+            form.save()
+            return redirect('home')
+    return render(request,'blogapp/academy_home.html',{'form':form})
