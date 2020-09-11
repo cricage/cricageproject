@@ -4,7 +4,7 @@ from .models import Article,Comment
 
 # Register your models here.
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ['title','slug','author','content','image1','image2','image3','publish','created','updated','status']
+    list_display = ['title','slug','author','content','image1','image2','image3','publish','created','status','type']
     prepopulated_fields={'slug':('title',)}
 class CommentAdmin(admin.ModelAdmin):
     list_display=['name','email','post','body','created','updated','active']

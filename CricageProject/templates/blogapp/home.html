@@ -16,16 +16,14 @@ level players doing exceedingly well in cricket, so that
 you can get information and news about cricketers
 from your state</h5>
       </div>
-      <!-- <div class="row center">
-        <a href="http://materializecss.com/getting-started.html" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Start Scoring</a>
-      </div> -->
       <br><br>
-
-    </div>
+  </div>
   </div>
   <div class="parallax"><img src="{% static 'images/ddd.jpg'%}" alt="Unsplashed background img 1"></div>
 </div>
-<br><br><br>
+<br>
+<h4 align="center">News</h4>
+<hr style="width:60%;text-align:left;margin-left:30">
       <div class="container">
          <div class="row">
             {% for post in posts %}
@@ -45,5 +43,8 @@ from your state</h5>
             {% endfor %}
 </div>
 </div>
+<h4 align="center">Biographies</h4>
+<hr style="width:60%;text-align:left;margin-left:30;background-color:#FF0000;">
+
 
 {% endblock%}

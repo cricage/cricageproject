@@ -13,7 +13,7 @@
         <div class="row">
            <div class="col s12">
               <hr>
-              <img src="{{post.image1.url}}" class="card-img-top" alt="" height="10%" width="70%" align="center" >
+              <img src="{{post.image1.url}}" class="card-img-top align="center"" alt="" height="10%" width="70%">
               <p>{{ post.content|linebreaks }}</p>
             </div>
           </div>
@@ -28,10 +28,6 @@
     <p>{{comment.body|linebreaks}}</p>
     {% endfor %}
     {% endif %}
-    <!-- {% if csubmit %}
-    <h2>Your comment added successfully</h2>
-    {% else %} -->
-    <!-- {% endif %} -->
     <form  method="post">
     {% for field in form.visible_fields %}
     {% render_field field placeholder=field.label  %}

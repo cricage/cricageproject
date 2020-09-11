@@ -12,8 +12,9 @@ def homepageview(request):
 
 
 def all_post(request):
-    posts=Article.objects.all()
-    return render(request,'blogapp/home.html',{'posts':posts})
+    posts = Article.objects.filter(type="news")
+    bio = Article.objects.filter(type="bio")
+    return render(request,'blogapp/home.html',{'posts':posts,'bio':bio})
 
 @login_required
 def post_detail(request,id):
