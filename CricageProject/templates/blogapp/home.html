@@ -30,10 +30,10 @@ from your state</h5>
             <div class="col s12 m4">
                <div class="card ">
                   <div class="card-content-news">
-                     <span class="card-title">	{{ post.title }}</span>
+                     <span class="card-title">	{{ post.title | truncatewords:10 }}</span>
                      <h1>{{ MEDIA_URL }}</h1>
                      <img src="{{post.image1.url}}" class="card-img-top" alt="" height="100%" width="100%">
-                     <p>{{ post.content |truncatewords:30|linebreaks }}</p>
+                     <p>{{ post.content |truncatewords:15|linebreaks }}</p>
                   </div>
                   <div class="card-action">
                      <a href="/post/{{ post.id }}">Read More</a>
@@ -50,11 +50,11 @@ from your state</h5>
       {% for bio in bio %}
       <div class="col s12 m4">
          <div class="card ">
-            <div class="card-content ">
-               <span class="card-title">	{{ bio.title }}</span>
+            <div class="card-content-news">
+               <span class="card-title">	{{ bio.title | truncatewords:10 }}</span>
                <h1>{{ MEDIA_URL }}</h1>
                <img src="{{bio.image1.url}}" class="card-img-top" alt="" height="160px" width="200px">
-               <p>{{ bio.content |truncatewords:30|linebreaks }}</p>
+               <p>{{ bio.content |truncatewords:15|linebreaks }}</p>
             </div>
             <div class="card-action">
                <a href="/post/{{ bio.id }}">Read More</a>
