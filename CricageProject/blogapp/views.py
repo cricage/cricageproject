@@ -55,3 +55,6 @@ def academy_view(request):
             form.save()
             return redirect('home')
     return render(request,'blogapp/academy_home.html',{'form':form})
+
+def  jobs_view(request):
+    return render(request,'blogapp/jobs.html')
