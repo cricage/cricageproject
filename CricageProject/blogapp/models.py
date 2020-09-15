@@ -11,12 +11,12 @@ class Article(models.Model):
     slug=models.SlugField(max_length=264,unique_for_date='publish')
     author=models.ForeignKey(User,related_name='blog_articles',on_delete = models.CASCADE)
     content=models.TextField()
-    image1=models.ImageField(upload_to='images/',null=True)
-    image2=models.ImageField(upload_to='images/',null=True)
-    image3=models.ImageField(upload_to='images/',null=True)
-    image4=models.ImageField(upload_to='images/',null=True)
-    image5=models.ImageField(upload_to='images/',null=True)
-    image6=models.ImageField(upload_to='images/',null=True)
+    image1=models.ImageField(upload_to='images/',blank=True)
+    image2=models.ImageField(upload_to='images/',blank=True)
+    image3=models.ImageField(upload_to='images/',blank=True)
+    image4=models.ImageField(upload_to='images/',blank=True)
+    image5=models.ImageField(upload_to='images/',blank=True)
+    image6=models.ImageField(upload_to='images/',blank=True)
     publish=models.DateTimeField(default=timezone.now)
     created=models.DateTimeField(auto_now_add=True)
     updated=models.DateTimeField(auto_now=True)
@@ -38,7 +38,7 @@ class Comment(models.Model):
     updated=models.DateTimeField(auto_now=True)
     active= models.BooleanField(default=True)
     class Meta:
-        ordering=('-created',)
+        ordering = ('-created',)
 
     def __str__(self):
         return self.name

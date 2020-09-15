@@ -29,10 +29,10 @@ from your state</h5>
             {% for post in posts %}
             <div class="col s12 m4">
                <div class="card ">
-                  <div class="card-content ">
+                  <div class="card-content-news">
                      <span class="card-title">	{{ post.title }}</span>
                      <h1>{{ MEDIA_URL }}</h1>
-                     <img src="{{post.image1.url}}" class="card-img-top" alt="" height="160px" width="250px">
+                     <img src="{{post.image1.url}}" class="card-img-top" alt="" height="100%" width="100%">
                      <p>{{ post.content |truncatewords:30|linebreaks }}</p>
                   </div>
                   <div class="card-action">
