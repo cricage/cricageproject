@@ -15,9 +15,9 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE_DIR = os.path.join(BASE_DIR,'templates')
-STATIC_DIR = os.path.join(BASE_DIR,'static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
+STATIC_DIR = os.path.join(BASE_DIR,"static")
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -26,9 +26,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 SECRET_KEY = 't=e26&cezwshpfimjaoa3b+wcv2!&od+1xwp5$q850-b1nwtnl'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["13.127.166.173","0.0.0.0"]
 
 
 # Application definition
@@ -127,3 +127,4 @@ STATICFILES_DIRS = [STATIC_DIR,]
 MEDIA_URL = '/media/'
 LOGIN_REDIRECT_URL="/home"
 LOGOUT_REDIRECT_URL="/home"
+
