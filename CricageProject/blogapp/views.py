@@ -16,7 +16,6 @@ def all_post(request):
     bio = Article.objects.filter(type="bio")
     return render(request,'blogapp/home.html',{'posts':posts,'bio':bio})
 
-@login_required
 def post_detail(request,id):
     post = get_object_or_404(Article,id=id)
     comments=post.comments.filter(active=True)
