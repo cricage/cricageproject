@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post Sign</title>
+    <style>
+
+        div{
+        position:absolute;
+        right:10px;
+        top:5px;
+        }
+
+    </style>
+
+</head>
+<body>
+<h1>Welcome</h1>
+<div>
+
+<button type="button" onclick="location.href='{% url 'logout' %}'" >Logout</button>
+</div>
+
+
+<button type="button" onclick="location.href='{% url 'Create' %}'" >Create Team</button>
+
+</body>
+</html>

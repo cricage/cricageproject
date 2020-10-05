@@ -27,9 +27,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 SECRET_KEY = 't=e26&cezwshpfimjaoa3b+wcv2!&od+1xwp5$q850-b1nwtnl'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-ALLOWED_HOSTS = ["13.127.166.173","0.0.0.0"]
+# DEBUG = False
+DEBUG = True
+# ALLOWED_HOSTS = ["13.127.166.173","0.0.0.0"]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blogapp',
+    'myScore',
     'widget_tweaks',
 ]
 
@@ -128,3 +130,16 @@ STATICFILES_DIRS = [STATIC_DIR,]
 MEDIA_URL = '/media/'
 LOGIN_REDIRECT_URL="/"
 LOGOUT_REDIRECT_URL="/"
+
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'cricage'
+EMAIL_HOST_PASSWORD = 'mys3cr3tp4ssw0rd'
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'TestSite Team <noreply@example.com>'

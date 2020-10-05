@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Team</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" rel="stylesheet"/>
+
+
+</head>
+<body>
+
+
+{% if msg %}
+<h1>{{msg}}</h1>
+{% endif %}
+
+
+
+<div id="dialog1" title="Select Batsman">
+    <form method="post">
+        {% csrf_token %}
+
+  <p>Select Player One</p>
+  <select name="batsman1">
+      <option disabled selected value> -- select an option -- </option>
+      {% for player in BatTeamPlayers %}
+    <option value="{{player}}">{{player}}</option>
+      {% endfor %}
+  </select>
+   <br>
+        <button type="submit" name="onfieldplayers" value="1">Select</button>
+    </form>
+</div>
+
+
+<div id="dialog2" title="Select Batsman">
+    <form method="post">
+        {% csrf_token %}
+
+  <p>Select Player Two</p>
+  <select name="batsman2">
+      <option disabled selected value> -- select an option -- </option>
+      {% for player in BatTeamPlayers %}
+    <option value="{{player}}">{{player}}</option>
+      {% endfor %}
+  </select>
+   <br>
+        <button type="submit" name="onfieldplayers" value="1">Select</button>
+    </form>
+</div>
+
+
+<div id="dialogb" title="Select Batsman">
+    <form method="post">
+        {% csrf_token %}
+
+  <p>Select Bowler</p>
+  <select name="bowler">
+            <option disabled selected value> -- select an option -- </option>
+
+      {% for player in BowlTeamPlayers %}
+    <option value="{{player}}">{{player}}</option>
+      {% endfor %}
+  </select>
+   <br>
+        <button type="submit" name="onfieldplayers" value="1">Select</button>
+    </form>
+</div>
+
+
+<div id="dialognoball" title="Select Runs">
+    <form method="post">
+        {% csrf_token %}
+
+  <p>Select Runs</p>
+  <select name="nbs" required>
+    <option value="noball">No Ball</option>
+    <option value="noball_1">No Ball + 1</option>
+    <option value="noball_2">No Ball + 2</option>
+    <option value="noball_3">No Ball + 3</option>
+    <option value="noball_4">No Ball + 4</option>
+    <option value="noball_6">No Ball + 6</option>
+    <option value="noball_RO">No Ball + Run out</option>
+</select>
+   <br>
+        <button type="submit" name="nbrun" value="1">Select</button>
+    </form>
+</div>
+
+
+
+
+<div id="dialogwicket" title="Select Type">
+    <form method="post">
+        {% csrf_token %}
+
+  <p>Select Wicket Type</p>
+  <select name="wicket" required>
+    <option disabled selected value> -- select an option -- </option>
+    <option value="Bowled">Bowled</option>
+    <option value="Caught">Caught</option>
+    <option value="LBW">LBW</option>
+    <option value="Runout">Run out</option>
+    <option value="Stumped">Stumped</option>
+    <option value="Retired">Retired</option>
+    <option value="Hittheballtwice">Hit the ball twice</option>
+    <option value="Hitwicket">Hit wicket</option>
+    <option value="Obstructingthefield">Obstructing the field</option>
+    <option value="Timedout">Timed out</option>
+</select>
+   <br>
+        <button type="submit" name="wckt" value="1">Select</button>
+    </form>
+</div>
+
+
+
+
+
+
+
+
+<div class="container" align="center">
+<div class="jumbotron">
+
+<div class="row">
+    <div class="col-md-3">
+        <h3>Batting Team: {{BatTeam}}</h3>
+        <h4>Batsman:{{request.session.player1}}</h4>
+        <ol>
+        {% for player in BatTeamPlayers %}
+        <li>
+         {{player}}<br>
+        </li>
+        {% endfor %}
+        </ol>
+
+    </div>
+
+    <div class="col-md-6">
+        <h3>Score:</h3>
+
+        <form method="post" action="/score">
+
+        {% csrf_token %}
+
+        <button type="submit" name="one" value="1">One</button><br><br>
+        <button type="submit" name="two" value="2">Two</button><br><br>
+        <button type="submit" name="three" value="3">Three</button><br><br>
+        <button type="submit" name="four" value="4">Four</button><br><br>
+        <button type="submit" name="six" value="6">Six</button><br><br>
+        <button type="submit" name="wide" value="1">Wide</button><br><br>
+             <input type="button" id="noballrun" value="No Ball"><br><br>
+            <input type="button" id="wicketid" value="Wicket"><br><br>
+        </form>
+
+    </div>
+
+    <div class="col-md-3">
+        <h3>Bowling Team:{{BowlTeam}}</h3>
+        <h4>Bowler:{{request.session.bowler}}</h4>
+        <ol>
+        {% for player in BowlTeamPlayers %}
+        <li>
+         {{player}}<br>
+        </li>
+        {% endfor %}
+        </ol>
+    </div>
+
+</div>
+</div>
+</div>
+
+
+
+
+<script>
+var x = 10;
+if (! ("{{request.session.player1}}")){
+  $('#dialog1').show();
+  $('#dialog1').dialog();
+}
+else{
+$('#dialog1').hide();
+}
+
+if (! ("{{request.session.player2}}")){
+  $('#dialog2').show();
+  $('#dialog2').dialog();
+}
+else{
+$('#dialog2').hide();
+}
+
+
+if (! ("{{request.session.bowler}}")){
+  $('#dialogb').show();
+  $('#dialogb').dialog();
+}
+else{
+$('#dialogb').hide();
+}
+
+
+$(function() {
+    $( "#dialognoball" ).dialog({
+      autoOpen: false
+    });
+
+    $( "#noballrun" ).click(function() {
+      $( "#dialognoball" ).dialog( "open" );
+    });
+  });
+
+$(function() {
+    $( "#dialogwicket" ).dialog({
+      autoOpen: false
+    });
+
+    $( "#wicketid" ).click(function() {
+      $( "#dialogwicket" ).dialog( "open" );
+    });
+  });
+
+</script>
+
+
+</body>
+</html>

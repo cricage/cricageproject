@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Player</title>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+<style>
+    .team{
+    border: solid;
+    background: aliceblue;
+    font-family: monospace;
+    }
+
+    .head{
+    border: solid;
+    background: darkgrey;
+    }
+
+    .listitem{
+        text-align: initial;
+        }
+
+</style>
+
+</head>
+<body>
+
+
+{% if msg %}
+
+<h1>{{msg}}</h1>
+
+{% endif %}
+
+
+
+<div class="container" align="center">
+<div class="jumbotron head">
+<h1>Create Match</h1>
+
+</div>
+</div>
+
+
+
+
+<form method="post">
+    {% csrf_token %}
+<div class="container" align="center">
+<div class="jumbotron team">
+    <h3>Select Team 1</h3>
+    <select name="team1">
+        <option></option>
+            {% for x in teams %}
+                {% if team1selected == x %}
+                <option value="{{x}}" selected>{{x}}</option>
+                {% else %}
+                <option value="{{x}}">{{x}}</option>
+                {% endif %}
+            {% endfor %}
+
+    </select>
+    <br>
+    <h1>Add Players</h1>
+    <select id="player1" name="player1">
+        <option></option>
+        {% for p in players %}
+          <option value="{{p}}">{{p}}</option>
+        {% endfor %}
+      </select>
+    <input type="submit" value="Add">
+
+    <br><br>
+<h1>All Players in Team 1</h1>
+    <ol>
+        {% for x in request.session.playerteam1 %}
+
+        <li class="listitem">{{x}}</li>
+
+        {% endfor %}
+    </ol>
+</div>
+</div>
+
+
+<div class="container" align="center">
+<div class="jumbotron team">
+
+    <h3>Select Team 2:</h3>
+    <select name="team2">
+        <option></option>
+            {% for x in teams %}
+                {% if team2selected == x %}
+                <option value="{{x}}" selected>{{x}}</option>
+                {% else %}
+                <option value="{{x}}">{{x}}</option>
+                {% endif %}
+            {% endfor %}
+
+            </select>
+
+            <br>
+        <h1>Add Players</h1>
+    <select id="player2" name="player2">
+        <option></option>
+        {% for p in players %}
+          <option value="{{p}}">{{p}}</option>
+        {% endfor %}
+      </select>
+    <input type="submit" value="Add">
+    <br><br>
+<h1>All Players in Team 2</h1>
+
+    <ol>
+        {% for y in request.session.playerteam2 %}
+
+        <li class="listitem">{{y}}</li>
+
+        {% endfor %}
+    </ol>
+
+
+</div>
+</div>
+
+<div class="container" id="tosscontainer" align="center">
+<div class="jumbotron head">
+
+    <button id="tossbutton" type="button" onclick="tosswin()" >Toss</button>
+    <h1 id="toss"></h1>
+    <input type="hidden" id="tossinp" name="tossinput" >
+    <input type="radio" id="batF" name ="toss_choice" value="Batting" >
+    <label id="batL" for="batF">Choose to Bat First</label><br>
+    <input type="radio" id="ballF" name ="toss_choice" value="Bowling" >
+    <label id="ballL" for="ballF">Choose to Ball First</label><br>
+    <button type="submit" onclick="setTime()" id="fix" >Start Match</button>
+    <input type="hidden" id="timeid" name="timeval">
+</div>
+</div>
+</form>
+
+
+<script>
+      $(document).ready(function () {
+      $('select').selectize({
+          sortField: 'text'
+      });
+  });
+
+</script>
+
+<script>
+
+document.getElementById("tosscontainer").style.display = "none";
+document.getElementById("fix").style.display = "none";
+document.getElementById("batF").style.display = "none";
+document.getElementById("ballF").style.display = "none";
+document.getElementById("batL").style.display = "none";
+document.getElementById("ballL").style.display = "none";
+document.getElementById("tossbutton").style.display = "none";
+
+var arr1 = "{{request.session.playerteam1}}".split(",");
+var arr2 = "{{request.session.playerteam2}}".split(",");
+if (arr1.length>1 && arr2.length>1) document.getElementById("tossbutton").style.display = "block";
+if (arr1.length>1 && arr2.length>1) document.getElementById("tosscontainer").style.display = "block";
+
+function tosswin(){
+        document.getElementById("tossbutton").style.display = "none";
+        document.getElementById("batF").style.display = "block";
+        document.getElementById("ballF").style.display = "block";
+        document.getElementById("fix").style.display = "block";
+        document.getElementById("batL").style.display = "block";
+        document.getElementById("ballL").style.display = "block";
+        var toss_result = _.sample(['Team 1', 'Team 2']);
+        document.getElementById("tossinp").value = toss_result;
+        return document.getElementById("toss").innerHTML = toss_result+' has won the Toss';
+        }
+
+</script>
+
+<script type="text/javascript">
+function setTime() {
+    document.getElementById('timeid').value = new Date().getTime();
+}
+</script>
+
+</body>
+</html>

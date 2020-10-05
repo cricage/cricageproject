@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Signin</title>
+</head>
+<body>
+
+{% if msg %}
+<script>
+    alert('{{msg}}')
+</script>
+{% endif %}
+
+
+<form action="postsign" method="post" >
+    {% csrf_token %}
+    Email:
+    <input type="email" name="email" ><br><br>
+    Password:
+    <input type="password" name="pass" ><br><br>
+    <input type="submit" value="Signin" >
+</form>
+
+
+</body>
+</html>
